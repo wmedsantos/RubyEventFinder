@@ -1,0 +1,31 @@
+    <% @eventos.each do |evento| %>
+
+            <div class="artigo" role="article">
+              <div class="row">
+                <div class="col-md-4">
+                  <a href="#" title="">
+                    <img src="<%= evento.site %>" alt="">
+                  </a>
+                </div>
+                <div class="col-md-8">
+                  <h2><a href="#"><%= evento.nome %></a></h2>
+                  <p><%= evento.descricao %></p>
+                  <p><%= evento.datainicio %></p>
+                  <p><%= evento.endereco %></p>
+                  <p>Vagas disponíveis: <%= evento.vagasdisponiveis  -  evento.inscricoes.count() %></p>
+                  <!--
+                  <p>
+                    <%= link_to 'Editar', edit_evento_path(evento) %> |
+                    <%= link_to 'Apagar', evento, method: :delete, data: { confirm: 'Tem certeza?' } %>
+                  </p>
+                  //-->
+
+                  <%= link_to 'Saiba Mais', evento %>
+                </div>
+              </div><!-- div row conteudo -->
+            </div>
+    <% end %>
+            
+    <br>
+
+   <!-- <%= link_to 'Novo Evento', new_evento_path %> //-->

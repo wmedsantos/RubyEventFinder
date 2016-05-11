@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  descricao: MyString
+  datainicio: 2016-05-03 21:55:19
+  datafim: 2016-05-03 21:55:19
+  local: MyString
+  endereco: MyString
+  site: MyString
+  vagasdisponiveis: 1
+
+two:
+  nome: MyString
+  descricao: MyString
+  datainicio: 2016-05-03 21:55:19
+  datafim: 2016-05-03 21:55:19
+  local: MyString
+  endereco: MyString
+  site: MyString
+  vagasdisponiveis: 1

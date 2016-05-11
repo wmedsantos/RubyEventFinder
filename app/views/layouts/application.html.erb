@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>EventFinder-UVA</title>
+    <%= stylesheet_link_tag    'bootstrapmin', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag    'estilo', media: 'all', 'data-turbolinks-track' => true %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" style="margin-top:-10px" href="#"><%= image_tag "logoTopo.png" %></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><%= link_to 'Eventos', eventos_path %></li>
+            
+            <% if usuario_signed_in? %>
+
+                <% if current_usuario.admin? %>
+                    <li><%= link_to "Admin", rails_admin_path %></li>
+                <% end %>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meus Dados <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Minhas Participações", inscricoes_path %></li>
+                <li class="divider"></li>
+                <li><%= link_to "Editar Conta", edit_usuario_registration_path %></li>
+                <li class="divider"></li>
+                <li><%= link_to 'Sair', destroy_usuario_session_path, :method => :delete %></li>
+              </ul>
+            </li>
+            
+            <li class="round-image-50"> <%= image_tag(avatar_url(current_usuario))%>
+
+            <% else %>
+                <li><%= link_to 'Cadastre-se', new_usuario_registration_path %></li>
+              <li><%= link_to 'Entrar', new_usuario_session_path %></li>
+           <% end %>
+      
+          </ul>
+          
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Pesquisar">
+            </div>
+            <button type="submit" class="btn btn-default">Pesquisar</button>
+          </form>
+          
+        </div>
+      </div>
+    </nav> <!-- final do navbar -->
+<br>
+    <div class="bd-pageheader">
+      <div class="container">
+        <h3>Controle de Eventos</h3>
+        <p class="lead">Sistema de controle e avaliação de eventos.</p>
+      </div>
+    </div>
+
+    <div class="wrapper" role="main">
+      <div class="container">
+        <div class="row">
+          <div id="conteudo" class="col-md-9">
+                
+                <% flash.each do |name, msg| %>
+                  <%= content_tag(:div, msg, class: "alert alert-info") %>
+                <% end %>
+                <%= yield %>
+
+          </div><!-- div conteudo -->
+
+          <!-- Sidebar -->
+          <div id="sidebar" class="col-md-3">
+            <div class="widget">
+              <h3>Newsletter</h3>
+              <form class="form" role="form">
+                <div class="form-group">
+                  <label class="sr-only" for="exampleInputEmail2">Entre com seu email</label>
+                  <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Entre com seu email">
+                </div>
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+              </form>
+            </div>
+            <div class="widget">
+              <h3>Parceiros</h3>
+              <ul>
+                <li><a href="http://www.dfapinformatica.com.br/" target="_blank">DFAP Informatica</a></li>
+                <li><a href="">Parceiro 2</a></li>
+                <li><a href="">Parceiro 3</a></li>
+                <li><a href="">Parceiro 4</a></li>
+                <li><a href="">Parceiro 5</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div><!-- div row container -->
+      </div><!-- div container -->
+    </div><!-- div wrapper -->
+    <footer style="background-color:#ccc"> <!-- Aqui e a area do footer -->
+      <div class="container" >
+        <div class="row">
+          <div id="linksImportantes" class="col-md-3">
+            <h4>Links Importantes</h4>
+            <ul>
+              <li><a href="http://startuprio.ime.uerj.br/" target="_blank">StartUp Rio</a></li>
+              <li><a href="https://www.caelum.com.br/apostila-ruby-on-rails/" target="_blank">Apostila Ruby</a></li>
+              <li><a href="http://www.tutorialspoint.com/execute_ruby_online.php" target="_blank">Execute Ruby</a></li>
+              
+            </ul>
+          </div> <!-- Aqui e a area dos links importantes -->
+          <div id="redesSociais" class="col-md-3">
+            <h4>Redes Sociais</h4>
+            <ul>
+              <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div> <!-- Aqui e a area das redes sociais -->
+          <div id="logoFooter" class="col-md-offset-3 col-md-3">
+            <h2><%= image_tag "logoTopo.png" %></h2>
+          </div> <!-- Aqui e a area da logo do rodape -->
+        </div>
+      </div>
+    </footer>
+    <div class="copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <p>&copy; Todos os direitos reservados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

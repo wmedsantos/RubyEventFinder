@@ -1,0 +1,32 @@
+    <% if (@inscricoes.count) == 0 %>
+
+        <div>Prezado Usuário, você não possui nenhuma inscrição.</div>
+
+    <% else %>
+
+         <% @inscricoes.each do |inscricao| %>
+            <div class="artigo" role="article">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <a href="#" title="">
+                          <img src="<%= inscricao.evento.site %>" alt="">
+                        </a>
+                      </div>
+                      <div class="col-md-8">
+                        <h2><a href="#"><%= inscricao.evento.nome %></a></h2>
+                        <p><%= inscricao.evento.descricao %></p>
+                        <p><%= inscricao.evento.datainicio %></p>
+                        <p><%= inscricao.evento.endereco %></p>
+                        <p>Vagas disponíveis: <%= inscricao.evento.vagasdisponiveis  -  inscricao.evento.inscricoes.count() %></p>
+                       
+                      </div>
+                          <a  class="btn btn-danger" data-confirm="Tem certeza?" rel="nofollow" data-method="delete" href="/inscricoes/<%=inscricao.id%>">Cancelar Inscrição</a>
+
+          
+                    </div><!-- div row conteudo -->
+                  </div>
+
+          <% end %>
+   <% end %>
+                  
+          
