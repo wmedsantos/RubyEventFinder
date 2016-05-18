@@ -1,6 +1,6 @@
 class EventosController < ApplicationController
    before_action :set_evento, only: [:show, :edit, :update, :destroy]
-   before_action :authenticate_user!, except: [:show, :index]
+   before_action :authenticate_usuario!, except: [:show, :index]
 
   # GET /eventos
   # GET /eventos.json
@@ -70,6 +70,6 @@ class EventosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def evento_params
-      params.require(:evento).permit(:nome, :descricao, :datainicio, :datafim, :local, :endereco, :site, :vagasdisponiveis)
+      params.require(:evento).permit(:nome, :descricao, :datainicio, :datafim, :local, :endereco, :site, :vagasdisponiveis, :palestrante, :imagem)
     end
 end

@@ -2,10 +2,27 @@ RailsAdmin.config do |config|
 
   config.main_app_name = ["EventFinder", "BackOffice"]
   config.authorize_with do
-  redirect_to main_app.root_path unless (current_usuario and current_usuario.admin)
+    redirect_to main_app.root_path unless (current_usuario and current_usuario.admin)
+ 
+  
 end
   ### Popular gems integration
-
+# configure :datainicio, :date do
+#   date_format :default
+# end
+#   configure :datafim, :date do
+#   date_format :default
+# end
+  # config.model 'Evento' do
+  #   edit do
+  #     field :datainicio do
+  #       date_format :default
+  #     end
+  #     field :datafim do
+  #     date_format :default   
+  #     end
+  #   end
+  # end
   ## == Devise ==
   # config.authenticate_with do
   #   warden.authenticate! scope: :user

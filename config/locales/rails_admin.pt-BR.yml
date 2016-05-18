@@ -127,3 +127,24 @@ pt-BR:
         default_col_sep: ","
         col_sep: "Separador de colunas"
         col_sep_help: "Deixar em branco para usar omissão ('%{value}')" # value is default_col_sep
+# formatos de data e hora
+  date:
+    formats:
+      default: ! '%d/%m/%Y'
+      short: ! "%d  de %B"
+      long: ! "%d de %B  de %Y %H:%M %p"
+      only_day: ! "%e"
+      very_long: "%A %d de %B de %Y %Hh %M"
+    day_names: [Domingo, Segunda, Terça, Quarta, Quinta, Sexta, Sábado]
+    abbr_day_names: [Dom, Seg, Ter, Qua, Qui, Sex, Sáb]
+    month_names: [~, Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro]
+    abbr_month_names: [~, Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez]
+    order: [year, month, day]
+
+  time:
+    formats: 
+      default: "%A, %d de %B de %Y, %H:%M h"
+      short: "%d/%m, %H:%M h"
+      long: "%A, %d de %B de %Y, %H:%M h"
+    am: ''
+    pm: ''          

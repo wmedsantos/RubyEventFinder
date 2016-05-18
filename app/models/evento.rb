@@ -10,7 +10,7 @@ validates :nome,
 validates :descricao,
 		presence: true,
 		length: {minimum: 10, 
-			maximum:100}
+			maximum:1000}
 validates :datainicio, 
 		presence: true
 		 			
@@ -31,4 +31,13 @@ validates :site,
 validates :vagasdisponiveis, 
 		numericality: { greater_than: 0, only_integer: true }
 
+validates :imagem,
+		presence: true,
+		length: {minimum: 10, 
+			maximum:100}
+
+validates :palestrante,
+		presence: true,
+		length: {minimum: 10, 
+			maximum:100}
 end

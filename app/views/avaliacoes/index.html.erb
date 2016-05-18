@@ -1,0 +1,45 @@
+    <% if (@avaliacoes.count) == 0 %>
+
+        <div>Prezado Usuário, você não possui nenhuma avaliação.</div>
+
+    <% else %>
+
+         <% @avaliacoes.each do |avaliacao| %>
+            <div class="artigo" role="article">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <a href="#" title="">
+                           <%= image_tag avaliacao.evento.imagem %> 
+                        </a>
+                      </div>
+                      <div class="col-md-8">
+                        <h2><a href="#"><%= avaliacao.evento.nome %></a></h2>
+                        <p><%= avaliacao.evento.descricao %></p>
+                        <p><%= avaliacao.evento.datainicio %></p>
+                        <p><%= avaliacao.evento.endereco %></p>
+                        <p>Vagas disponíveis: <%= avaliacao.evento.vagasdisponiveis  -  avaliacao.evento.inscricoes.count() %></p>
+                       
+                      </div>
+                     <form action='/avaliacoes' method="post">
+                       <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+                       <input type='hidden' name='avaliacao[evento_id]' value="<%= avaliacao.evento.id %>"/>
+                        <br> <br> 
+                       <%= select_tag "nota", "<option value=1>Ruim</option><option value=2>Médio</option><option value=3>Bom</option><option value=4>Ótimo</option><option value=5>Excelente</option>".html_safe, class: 'form_input' %>
+                       <%= radio_button("avaliacao", "nota", "1")%>Ruim 
+                       <%= radio_button("avaliacao", "nota", "2")%>Médio 
+                       <%= radio_button("avaliacao", "nota", "3")%>Bom 
+                       <%= radio_button("avaliacao", "nota", "4")%>Ótimo
+                       <%= radio_button("avaliacao", "nota", "5")%>Excelente
+                       <br> <br> 
+                       <textarea class="form-control" rows="4" id="texto"><%= avaliacao.texto  %></textarea>
+                       <br>
+                      <button type="submit" class="btn btn-avaliar">Enviar avaliação</button>
+                    </form>
+          
+                    </div><!-- div row conteudo -->
+                  </div>
+
+          <% end %>
+   <% end %>
+                  
+          

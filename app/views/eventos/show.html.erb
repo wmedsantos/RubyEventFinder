@@ -1,8 +1,14 @@
+<div class="row">
+  <div class="col-md-8">
+    <%= image_tag( @evento.imagem, width: '50px') %>
+  </div>                
+</div>
+<div class="row">
+  <div class="col-md-8">
 <p>
   <strong>Nome:</strong>
   <%= @evento.nome %>
 </p>
-
 <p>
   <strong>Descricao:</strong>
   <%= @evento.descricao %>
@@ -30,7 +36,7 @@
 
 <p>
   <strong>Site:</strong>
-  <%= @evento.site %>
+  <%= link_to @evento.site , @evento.site  %> 
 </p>
 
 <p>
@@ -44,20 +50,43 @@
 <% if usuario_signed_in? && (current_usuario.inscricoes.where(evento_id:@evento.id).count) > 0 %>
 <a  class="btn btn-danger" data-confirm="Tem certeza?" rel="nofollow" data-method="delete" href="/inscricoes/<%=current_usuario.inscricoes.where(evento_id:@evento.id).first.id%>">Cancelar Inscrição</a>
 
-
-
-
 <!--SEM VAGAS//-->
-<% elsif (@evento.vagasdisponiveis  -  @evento.inscricoes.count())>0 %> 
+<% elsif (@evento.vagasdisponiveis  -  @evento.inscricoes.count())>0 and (@evento.datafim > Date.current()) %> 
 <form action='/inscricoes' method="post">
    <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
    <input type='hidden' name='inscricao[evento_id]' value="<%= @evento.id %>"/>
   <button type="submit" class="btn btn-success">Quero Participar</button>
 </form>
+<!--AVALIAR EVENTO//-->
 <% end %>
+<% if (@evento.datainicio < Date.current()) %> 
+<form action='/avaliacoes' method="post">
+   <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+   <input type='hidden' name='avaliacao[evento_id]' value="<%= @evento.id %>"/>
+    <br> <br> 
+   
+                      <%= radio_button("avaliacao", "nota", "1")%>Ruim 
+                       <%= radio_button("avaliacao", "nota", "2")%>Médio 
+                       <%= radio_button("avaliacao", "nota", "3")%>Bom 
+                       <%= radio_button("avaliacao", "nota", "4")%>Ótimo
+                       <%= radio_button("avaliacao", "nota", "5")%>Excelente
 
+   <br> <br> 
+   <textarea class="form-control" rows="4" id="texto"></textarea>
+   <br>
+  <button type="submit" class="btn btn-avaliar">Enviar avaliação</button>
+</form>
+<% end %>
+</form>
 
-<br><br>
+  </div>                
+</div>
 
-<img src="http://maps.google.com/maps/api/staticmap?size=1200x1200&maptype=roadmap&sensor=false&markers=color:red|label:A|<%= @evento.endereco %>" width="100" alt="<%= @evento.nome %>"></img>
+<div class="row">
+  <div class="col-md-8">
+    <p><br>    
+      <img src="http://maps.google.com/maps/api/staticmap?size=1200x1200&maptype=roadmap&sensor=false&markers=color:red|label:A|<%= @evento.endereco %>" width="100" alt="<%= @evento.nome %>"></img>
+    </p>
+  </div>                
+</div>
 
