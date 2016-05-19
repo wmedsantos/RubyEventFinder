@@ -60,11 +60,15 @@
 <!--AVALIAR EVENTO//-->
 <% end %>
 <% if (@evento.datainicio < Date.current()) %> 
-<form action='/avaliacoes' method="post">
+<%= form_for(@avaliacao) do |f| %>
+  
    <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
    <input type='hidden' name='avaliacao[evento_id]' value="<%= @evento.id %>"/>
-    <br> <br> 
-   
+    <br>
+    <p>
+      <strong>Avalie o evento:</strong>
+    </p>
+
                       <%= radio_button("avaliacao", "nota", "1")%>Ruim 
                        <%= radio_button("avaliacao", "nota", "2")%>Médio 
                        <%= radio_button("avaliacao", "nota", "3")%>Bom 
@@ -72,12 +76,12 @@
                        <%= radio_button("avaliacao", "nota", "5")%>Excelente
 
    <br> <br> 
-   <textarea class="form-control" rows="4" id="texto"></textarea>
+   <textarea class="form-control" rows="4" name="avaliacao[texto]"><%= @avaliacao.texto%></textarea>
    <br>
-  <button type="submit" class="btn btn-avaliar">Enviar avaliação</button>
-</form>
+  <button type="submit" class="btn btn-success">Enviar avaliação</button>
 <% end %>
-</form>
+<% end %>
+
 
   </div>                
 </div>
@@ -89,4 +93,3 @@
     </p>
   </div>                
 </div>
-

@@ -24,6 +24,19 @@ class AvaliacoesController < ApplicationController
      	redirect_to :back 
 	end
 
+# PATCH/PUT /avaliacoes/1
+  # PATCH/PUT /avaliacoes/1.json
+  def update
+     
+      if @avaliacao.update(avaliacao_params)
+        flash[:notice] = 'Avaliação realizada!'
+      else
+        flash[:error] = 'Erro ao avaliar evento!'
+      end
+     	#redirect_to evento_path(@avaliacao.evento_id)
+     	redirect_to :back 
+  end
+
 	def destroy
     	@avaliacao.destroy
     	#redirect_to evento_path(@avaliacao.evento_id)

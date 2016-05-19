@@ -31,9 +31,9 @@
                        <%= radio_button("avaliacao", "nota", "4")%>Ótimo
                        <%= radio_button("avaliacao", "nota", "5")%>Excelente
                        <br> <br> 
-                       <textarea class="form-control" rows="4" id="texto"><%= avaliacao.texto  %></textarea>
+                       <textarea class="form-control" rows="4" name="avaliacao[texto]"><%= avaliacao.texto  %></textarea>
                        <br>
-                      <button type="submit" class="btn btn-avaliar">Enviar avaliação</button>
+                      <button type="submit" class="btn btn-success">Enviar avaliação</button>
                     </form>
           
                     </div><!-- div row conteudo -->
