@@ -11,8 +11,12 @@ class EventosController < ApplicationController
   # GET /eventos/1
   # GET /eventos/1.json
   def show
-    @avaliacao =  current_usuario.avaliacoes.where(evento_id:@evento.id).first
-    if (@avaliacao.blank?)
+    if (!current_usuario.blank?)
+      @avaliacao =  current_usuario.avaliacoes.where(evento_id:@evento.id).first
+      if (@avaliacao.blank?)
+        @avaliacao = Avaliacao.new
+      end
+    else
       @avaliacao = Avaliacao.new
     end
   end
